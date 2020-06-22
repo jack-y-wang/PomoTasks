@@ -118,9 +118,11 @@ class Timer extends React.Component {
 						<PausePlayButton isPlaying={isPlaying} onClick={this.toggleIsPlaying} />
 					</div>
 					{/* <div class="break>" /> */}
-					<div className="description">
-						<p>{task.description}</p>
-					</div>
+					{this.state.task && (
+						<div className="description">
+							<p>{task.description}</p>
+						</div>
+					)}
 				</div>
 			</div>
 		);

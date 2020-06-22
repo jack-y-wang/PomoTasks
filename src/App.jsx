@@ -42,10 +42,29 @@ class App extends React.Component {
 	}
 
 	clearCompletedItems() {
+		this.resetTimer();
+
 		this.setState({
 			items: this.state.items.filter((item) => item.isCompleted === false),
 			areItemsMarkedAsCompleted: false
 		});
+	}
+
+	resetTimer() {
+		let items = [ ...this.state.items ];
+		let isTimer = false;
+		items.forEach((item) => {
+			if (item.isCompleted && item.id === this.state.itemIdRunning) {
+				isTimer = true;
+			}
+		});
+
+		if (isTimer) {
+			this.setState({
+				sessionIsRunning: false,
+				itemIdRunning: null
+			});
+		}
 	}
 
 	increaseSessionsCompleted(itemId) {
@@ -82,10 +101,17 @@ class App extends React.Component {
 	}
 
 	startSession(id) {
+		let runningItem = null;
+		let items = [ ...this.state.items ];
+		items.forEach((item) => {
+			if (item.id === id) {
+				runningItem = item;
+			}
+		});
 		this.setState({
 			sessionIsRunning: true,
 			itemIdRunning: id,
-			activeItem: this.state.items[id]
+			activeItem: runningItem
 		});
 	}
 
