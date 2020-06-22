@@ -8,107 +8,123 @@ const WORK_TIME = 2;
 const BREAK_TIME = 1;
 
 const MODES_TIMES = {
-  WORK: WORK_TIME,
-  BREAK: BREAK_TIME,
+	WORK: WORK_TIME,
+	BREAK: BREAK_TIME
 };
 
 const TIME_STEP = 1000;
 
 class Timer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.setTimer = this.setTimer.bind(this);
-    this.stop = this.stop.bind(this);
-    this.tick = this.tick.bind(this);
-    this.completeSession = this.completeSession.bind(this);
-    this.toggleIsPlaying = this.toggleIsPlaying.bind(this);
-    this.reset = this.reset.bind(this);
+	constructor(props) {
+		super(props);
+		this.setTimer = this.setTimer.bind(this);
+		this.stop = this.stop.bind(this);
+		this.tick = this.tick.bind(this);
+		this.completeSession = this.completeSession.bind(this);
+		this.toggleIsPlaying = this.toggleIsPlaying.bind(this);
+		this.reset = this.reset.bind(this);
 
-    this.state = {
-      mode: props.mode,
-      time: MODES_TIMES[props.mode],
-      isPlaying: props.autoPlays,
-    };
-  }
+		this.state = {
+			mode: props.mode,
+			time: MODES_TIMES[props.mode],
+			isPlaying: props.autoPlays,
+			task: props.task
+		};
+	}
 
-  componentDidMount() {
-    const { mode, time } = this.state;
-    this.setTimer(mode, time);
-  }
+	componentDidMount() {
+		const { mode, time } = this.state;
+		this.setTimer(mode, time);
+	}
 
-  componentWillUnmount() {
-    this.stop();
-  }
+	componentWillUnmount() {
+		this.stop();
+	}
 
-  setTimer(mode, time) {
-    this.setState({
-      mode,
-      time,
-    });
+	componentDidUpdate() {
+		if (this.state.task !== this.props.task) {
+			this.setState({
+				task: this.props.task
+			});
+		}
+	}
 
-    this.timerID = setInterval(this.tick, TIME_STEP);
-  }
+	setTimer(mode, time) {
+		this.setState({
+			mode,
+			time
+		});
 
-  stop() {
-    this.setState({ isPlaying: false });
-    clearInterval(this.timerID);
-  }
+		this.timerID = setInterval(this.tick, TIME_STEP);
+	}
 
-  tick() {
-    const { mode, isPlaying, time } = this.state;
+	stop() {
+		this.setState({ isPlaying: false });
+		clearInterval(this.timerID);
+	}
 
-    if (isPlaying) {
-      this.setState(prevState => ({
-        time: prevState.time - 1,
-      }),
-      () => {
-        if (time === 0) {
-          this.stop();
+	tick() {
+		const { mode, isPlaying, time } = this.state;
 
-          if (mode === 'WORK') {
-            this.setTimer('BREAK', MODES_TIMES.BREAK);
-          }
+		if (isPlaying) {
+			this.setState(
+				(prevState) => ({
+					time: prevState.time - 1
+				}),
+				() => {
+					if (time === 0) {
+						this.stop();
 
-          if (mode === 'BREAK') {
-            this.completeSession();
-            this.setTimer('WORK', MODES_TIMES.WORK);
-          }
-        }
-      });
-    }
-  }
+						if (mode === 'WORK') {
+							this.setTimer('BREAK', MODES_TIMES.BREAK);
+						}
 
-  toggleIsPlaying() {
-    this.setState(prevState => ({ isPlaying: !prevState.isPlaying }));
-  }
+						if (mode === 'BREAK') {
+							this.completeSession();
+							this.setTimer('WORK', MODES_TIMES.WORK);
+						}
+					}
+				}
+			);
+		}
+	}
 
-  reset() {
-    this.stop();
-    this.setTimer('WORK', MODES_TIMES.WORK, false);
-  }
+	toggleIsPlaying() {
+		this.setState((prevState) => ({ isPlaying: !prevState.isPlaying }));
+	}
 
-  completeSession() {
-    const { onSessionComplete } = this.props;
-    onSessionComplete();
-  }
+	reset() {
+		this.stop();
+		this.setTimer('WORK', MODES_TIMES.WORK, false);
+	}
 
+	completeSession() {
+		const { onSessionComplete } = this.props;
+		onSessionComplete();
+	}
 
-  render() {
-    const { mode, time, isPlaying } = this.state;
-    const formattedTime = formatSecondsToMinutesAndSeconds(time);
-    const timerClassName = `card timer-container ${mode === 'WORK' ? 'timer-work' : 'timer-break'}`;
-    return (
-      <div className={timerClassName}>
-        <div>
-          <ResetButton onClick={this.reset} />
-        </div>
-        <div>{formattedTime}</div>
-        <div>
-          <PausePlayButton isPlaying={isPlaying} onClick={this.toggleIsPlaying} />
-        </div>
-      </div>
-    );
-  }
+	render() {
+		const { mode, time, isPlaying, task } = this.state;
+		const formattedTime = formatSecondsToMinutesAndSeconds(time);
+		const timerClassName = `card timer-container ${mode === 'WORK' ? 'timer-work' : 'timer-break'}`;
+		return (
+			<div>
+				<div className={timerClassName}>
+					<div>
+						<ResetButton onClick={this.reset} />
+					</div>
+					<div>{formattedTime}</div>
+					<div>
+						<PausePlayButton isPlaying={isPlaying} onClick={this.toggleIsPlaying} />
+					</div>
+					{/* <div class="break>" /> */}
+					<div className="description">
+						<p>{task.description}</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Timer;

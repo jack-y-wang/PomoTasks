@@ -1,44 +1,54 @@
 .timer-container {
-  font-weight: 700;
-  font-size: 2rem;
-  color: white;
-  padding: 1em 1em;
-  display: flex;
-  text-align: center;
+	font-weight: 700;
+	font-size: 2rem;
+	color: white;
+	padding: 1em 1em;
+	display: flex;
+	flex-wrap: wrap;
+	text-align: center;
 }
 
 .timer-container > div {
-  flex-grow: 1;
-  width: 33%;
+	flex-grow: 1;
+	width: 33%;
 }
 
 .timer-work {
-  background: linear-gradient(-180deg, #5AC5FF 0%, #88B0FF 100%);
+	background: linear-gradient(-180deg, #5ac5ff 0%, #88b0ff 100%);
 }
 
 .timer-break {
-  background-image: linear-gradient(-180deg, #5EEDAA 3%, #50c78f 100%);
+	background-image: linear-gradient(-180deg, #5eedaa 3%, #50c78f 100%);
 }
 
 .timer-button {
-  border: 0;
-  background: none;
-  color: white;
-  cursor: pointer;
+	border: 0;
+	background: none;
+	color: white;
+	cursor: pointer;
 }
 
 .timer-button > svg {
-  width: 24px;
-  height: 24px;
+	width: 24px;
+	height: 24px;
 }
 
 .timer-button > svg:hover {
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 /* bad for a11y but looks better 🤷‍ */
 /* good fix: https://medium.freecodecamp.org/how-to-make-your-fancy-svg-button-accessible-83c9172c3c15 */
 .timer-button:focus {
-  outline: 0;
+	outline: 0;
+}
+
+.description > p {
+	flex-basis: 100%;
+	margin-top: 0.5em;
+	font-weight: 300;
+	font-size: 1.5rem;
+	margin-bottom: 0em;
+	text-align: center;
 }

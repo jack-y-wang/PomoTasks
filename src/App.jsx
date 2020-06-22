@@ -21,12 +21,14 @@ class App extends React.Component {
 			nextItemId: 0,
 			sessionIsRunning: false,
 			itemIdRunning: null,
-			areItemsMarkedAsCompleted: false
+			areItemsMarkedAsCompleted: false,
+			activeItem: null
 		};
 	}
 
 	addItem(description) {
 		const { nextItemId } = this.state;
+
 		const newItem = {
 			id: nextItemId,
 			description: description,
@@ -82,12 +84,13 @@ class App extends React.Component {
 	startSession(id) {
 		this.setState({
 			sessionIsRunning: true,
-			itemIdRunning: id
+			itemIdRunning: id,
+			activeItem: this.state.items[id]
 		});
 	}
 
 	render() {
-		const { items, sessionIsRunning, itemIdRunning, areItemsMarkedAsCompleted } = this.state;
+		const { items, sessionIsRunning, itemIdRunning, areItemsMarkedAsCompleted, activeItem } = this.state;
 		return (
 			<div className="flex-wrapper">
 				<div className="container">
@@ -101,7 +104,8 @@ class App extends React.Component {
 							onSessionComplete={() => {
 								this.increaseSessionsCompleted(itemIdRunning);
 							}}
-							autoPlays
+							task={activeItem}
+							autoPlays={false}
 						/>
 					)}
 					{this.state.items.length > 0 ? (
