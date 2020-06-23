@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import '../styles/Modal.css';
 ReactModal.defaultStyles.overlay.backgroundColor = 'rgba(0, 0, 0, 0.51)';
 
@@ -91,15 +91,14 @@ export default class ModalInput extends React.Component {
 						<Button icon="caret down" />
 					</div>
 				</div>
-				<footer>
-					{/* use active and disable props*/}
+				<div className="modal-footer">
 					<Button floated="right" color="grey" disabled={!addButtonActive} onClick={this.handleSubmit}>
 						Add
 					</Button>
 					<Button floated="right" onClick={this.handleClose}>
 						Cancel
 					</Button>
-				</footer>
+				</div>
 			</ReactModal>
 		);
 	}

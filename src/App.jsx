@@ -1,10 +1,11 @@
 import React from 'react';
 import Timer from './components/Timer';
 import TodoItem from './components/TodoItem';
-import TodoInput from './components/TodoInput';
 import ClearButton from './components/ClearButton';
 import EmptyState from './components/EmptyState';
 import ModalInput from './components/ModalInput';
+
+import { Button, Icon } from 'semantic-ui-react';
 
 import './styles/App.css';
 
@@ -167,7 +168,11 @@ class App extends React.Component {
 					)}
 				</div>
 				<footer>
-					<TodoInput addItem={this.addItemPressed} />
+					<Button fluid onClick={this.addItemPressed}>
+						<Icon name="add" />
+						Add Task
+					</Button>
+					{/* <TodoInput addItem={this.addItemPressed} /> */}
 					<ModalInput
 						showModal={this.state.showModal}
 						handleCloseModal={this.handleCloseModal}
