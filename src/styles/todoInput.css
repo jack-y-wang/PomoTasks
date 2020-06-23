@@ -23,7 +23,7 @@
 }
 
 .todo-input:focus {
-	outline: 10px #58abee;
+	outline: 2px #58abee;
 }
 
 .todo-input-button {

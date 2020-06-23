@@ -4,6 +4,7 @@ import TodoItem from './components/TodoItem';
 import TodoInput from './components/TodoInput';
 import ClearButton from './components/ClearButton';
 import EmptyState from './components/EmptyState';
+import ModalInput from './components/ModalInput';
 
 import './styles/App.css';
 
@@ -11,10 +12,12 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.addItem = this.addItem.bind(this);
+		this.addItemPressed = this.addItemPressed.bind(this);
 		this.clearCompletedItems = this.clearCompletedItems.bind(this);
 		this.startSession = this.startSession.bind(this);
 		this.increaseSessionsCompleted = this.increaseSessionsCompleted.bind(this);
 		this.toggleItemIsCompleted = this.toggleItemIsCompleted.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
 
 		this.state = {
 			items: [],
@@ -22,7 +25,8 @@ class App extends React.Component {
 			sessionIsRunning: false,
 			itemIdRunning: null,
 			areItemsMarkedAsCompleted: false,
-			activeItem: null
+			activeItem: null,
+			showModal: false
 		};
 	}
 
@@ -37,8 +41,19 @@ class App extends React.Component {
 		};
 		this.setState((prevState) => ({
 			items: prevState.items.concat(newItem),
-			nextItemId: prevState.nextItemId + 1
+			nextItemId: prevState.nextItemId + 1,
+			showModal: false
 		}));
+	}
+
+	addItemPressed(de) {
+		this.setState({
+			showModal: true
+		});
+	}
+
+	handleCloseModal() {
+		this.setState({ showModal: false });
 	}
 
 	clearCompletedItems() {
@@ -152,7 +167,12 @@ class App extends React.Component {
 					)}
 				</div>
 				<footer>
-					<TodoInput addItem={this.addItem} />
+					<TodoInput addItem={this.addItemPressed} />
+					<ModalInput
+						showModal={this.state.showModal}
+						handleCloseModal={this.handleCloseModal}
+						addItem={this.addItem}
+					/>
 				</footer>
 			</div>
 		);
