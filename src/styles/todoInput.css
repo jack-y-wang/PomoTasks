@@ -1,43 +1,48 @@
 .todo-input-container > form {
-  display: flex;
+	display: flex;
 }
 
-.todo-input, .todo-input-button {
-  box-sizing: border-box;
-  padding-top: 0.7em;
-  padding-bottom: 0.7em;
-  font-size: 1.2em;
-  font-weight: 600;
-  border: 0;
+.todo-input,
+.todo-input-button {
+	box-sizing: border-box;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	font-size: 1.2em;
+	font-weight: 550;
+	border: 0;
 }
 
 .todo-input {
-  padding-left: 1em;
-  background: #E7EDF8;
-  border-radius: 4px 0 0 4px;
-  flex-grow: 1;
+	padding-left: 1em;
+	background: #e7edf8;
+	border-radius: 4px 0 0 4px;
+	flex-grow: 1;
 }
 .todo-input::placeholder {
-  color: #8A98AF;
+	color: #8a98af;
+}
+
+.todo-input:focus {
+	outline: 10px #58abee;
 }
 
 .todo-input-button {
-  background: #4A6ED2;
-  color: white;
-  border-radius: 0 4px 4px 0;
-  /*
+	background: #58abee;
+	color: white;
+	border-radius: 0 4px 4px 0;
+	/*
   center children vertically and horizontally
   https://stackoverflow.com/questions/25832340/css-flexbox-vertically-horizontally-center-image-without-explicitely-defining-pa
   */
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
-  /* minimum size */
-  flex-basis: 2.7em;
-  cursor: pointer;
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; /* align vertical */
+	/* minimum size */
+	flex-basis: 2.7em;
+	cursor: pointer;
 }
 
 .todo-input-button > svg {
-  width: 1em;
-  height: 1em;
+	width: 1em;
+	height: 1em;
 }

@@ -121,7 +121,7 @@ class App extends React.Component {
 			<div className="flex-wrapper">
 				<div className="container">
 					<header>
-						<h1 className="heading">Today</h1>
+						<h1 className="heading">What are we doing today?</h1>
 						{areItemsMarkedAsCompleted && <ClearButton onClick={this.clearCompletedItems} />}
 					</header>
 					{sessionIsRunning && (
