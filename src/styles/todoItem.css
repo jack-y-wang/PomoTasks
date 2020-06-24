@@ -24,6 +24,7 @@
 	margin-top: 0.5em;
 	width: 100%;
 	border-radius: 5px;
+	white-space: pre-wrap;
 }
 
 .todo-item-container-left {
@@ -36,6 +37,7 @@
 	background: none;
 	cursor: pointer;
 	margin-right: 2px;
+	height: 36px;
 }
 
 /* bad for a11y but looks better 🤷‍ */
@@ -89,6 +91,7 @@
 	border: 0;
 	background: none;
 	cursor: pointer;
+	height: 36px;
 	/* display: none; */
 }
 

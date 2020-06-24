@@ -22,6 +22,10 @@ header {
 	flex-grow: 70;
 }
 
+h1:last-child {
+	margin-bottom: 14px;
+}
+
 .clear-button {
 	color: grey;
 	border: 0;

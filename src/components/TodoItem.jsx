@@ -14,9 +14,6 @@ function TodoItem({
 	expectedSessions
 }) {
 	var sessionsRemaining = expectedSessions - sessionsCompleted;
-	if (sessionsRemaining < 0) {
-		sessionsRemaining = 0;
-	}
 	return (
 		<div className="card todo-item-container">
 			<div className="todo-item-container-left">
@@ -35,7 +32,11 @@ function TodoItem({
 						sessionsCompleted={sessionsCompleted}
 						sessionsRemaining={sessionsRemaining}
 					/>
-					{description !== '' && <div className="todo-item-note-container">{description}</div>}
+					{description !== '' && (
+						<div className="todo-item-note-container">
+							<p>{description}</p>
+						</div>
+					)}
 				</div>
 			</div>
 			<button type="button" onClick={startSession} className="todo-item-start-session-button">

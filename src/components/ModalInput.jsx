@@ -25,6 +25,10 @@ export default class ModalInput extends React.Component {
 		this.showNoteField = this.showNoteField.bind(this);
 	}
 
+	componentDidMount() {
+		ReactModal.setAppElement('body');
+	}
+
 	taskChange(e) {
 		const todoItemValue = e.target.value;
 		this.setState({ todoItemValue: todoItemValue });

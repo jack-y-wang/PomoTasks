@@ -11,9 +11,13 @@
 }
 
 .completed {
-	background: #77bfa3;
+	background: #38cc93;
 }
 
 .remaining {
 	background: #d6d6d6;
+}
+
+.additional {
+	background: rgb(27, 138, 241);
 }
