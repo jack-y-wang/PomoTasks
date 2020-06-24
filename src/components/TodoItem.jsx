@@ -4,7 +4,15 @@ import SessionsCompletedCounter from './SessionsCompletedCounter';
 import { ReactComponent as Check } from '../icons/check.svg';
 import { ReactComponent as Clock } from '../icons/clock.svg';
 
-function TodoItem({ task, sessionsCompleted, isCompleted, startSession, toggleIsCompleted, expectedSessions }) {
+function TodoItem({
+	task,
+	description,
+	sessionsCompleted,
+	isCompleted,
+	startSession,
+	toggleIsCompleted,
+	expectedSessions
+}) {
 	var sessionsRemaining = expectedSessions - sessionsCompleted;
 	if (sessionsRemaining < 0) {
 		sessionsRemaining = 0;
@@ -12,21 +20,22 @@ function TodoItem({ task, sessionsCompleted, isCompleted, startSession, toggleIs
 	return (
 		<div className="card todo-item-container">
 			<div className="todo-item-container-left">
-				<button onClick={toggleIsCompleted} type="button" className="todo-item-complete-button">
+				<button type="button" className="todo-item-complete-button">
 					{isCompleted ? (
-						<div className="todo-item-circle todo-item-circle-check">
+						<div onClick={toggleIsCompleted} className="todo-item-circle todo-item-circle-check">
 							<Check />
 						</div>
 					) : (
-						<div className="todo-item-circle todo-item-circle-empty" />
+						<div onClick={toggleIsCompleted} className="todo-item-circle todo-item-circle-empty" />
 					)}
 				</button>
-				<div>
+				<div className="task-info" onClick={startSession}>
 					<div className="todo-item-task">{task}</div>
 					<SessionsCompletedCounter
 						sessionsCompleted={sessionsCompleted}
 						sessionsRemaining={sessionsRemaining}
 					/>
+					{description !== '' && <div className="todo-item-note-container">{description}</div>}
 				</div>
 			</div>
 			<button type="button" onClick={startSession} className="todo-item-start-session-button">

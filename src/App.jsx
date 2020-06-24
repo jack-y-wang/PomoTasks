@@ -31,12 +31,13 @@ class App extends React.Component {
 		};
 	}
 
-	addItem(task, expectedPomodoros) {
+	addItem(task, expectedPomodoros, description) {
 		const { nextItemId } = this.state;
 
 		const newItem = {
 			id: nextItemId,
 			task: task,
+			description: description,
 			sessionsCompleted: 0,
 			isCompleted: false,
 			expectedSessions: expectedPomodoros
@@ -48,7 +49,7 @@ class App extends React.Component {
 		}));
 	}
 
-	addItemPressed(de) {
+	addItemPressed() {
 		this.setState({
 			showModal: true
 		});
@@ -157,6 +158,7 @@ class App extends React.Component {
 								<TodoItem
 									key={item.id}
 									task={item.task}
+									description={item.description}
 									expectedSessions={item.expectedSessions}
 									sessionsCompleted={item.sessionsCompleted}
 									isCompleted={item.isCompleted}

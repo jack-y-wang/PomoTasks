@@ -11,7 +11,9 @@ export default class ModalInput extends React.Component {
 		this.state = {
 			numPomodoros: 1,
 			todoItemValue: '',
-			addButtonActive: false
+			itemDescription: '',
+			addButtonActive: false,
+			showNote: false
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,7 @@ export default class ModalInput extends React.Component {
 		this.handleClose = this.handleClose.bind(this);
 		this.increment = this.increment.bind(this);
 		this.decrement = this.decrement.bind(this);
+		this.showNoteField = this.showNoteField.bind(this);
 	}
 
 	taskChange(e) {
@@ -45,12 +48,13 @@ export default class ModalInput extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const { addItem } = this.props;
-		const { todoItemValue, numPomodoros } = this.state;
+		const { todoItemValue, numPomodoros, itemDescription } = this.state;
 		if (todoItemValue !== '') {
-			addItem(todoItemValue, numPomodoros);
+			addItem(todoItemValue, numPomodoros, itemDescription);
 			this.setState({
 				numPomodoros: 1,
-				todoItemValue: ''
+				todoItemValue: '',
+				itemDescription: ''
 			});
 		}
 	}
@@ -60,9 +64,17 @@ export default class ModalInput extends React.Component {
 		this.setState({
 			numPomodoros: 1,
 			todoItemValue: '',
-			addButtonActive: false
+			itemDescription: '',
+			addButtonActive: false,
+			showNote: false
 		});
 		handleCloseModal();
+	}
+
+	showNoteField() {
+		this.setState({
+			showNote: true
+		});
 	}
 
 	increment() {
@@ -78,7 +90,7 @@ export default class ModalInput extends React.Component {
 	}
 
 	render() {
-		const { numPomodoros, todoItemValue, addButtonActive } = this.state;
+		const { numPomodoros, todoItemValue, addButtonActive, showNote, itemDescription } = this.state;
 		return (
 			<ReactModal
 				isOpen={this.props.showModal}
@@ -87,7 +99,7 @@ export default class ModalInput extends React.Component {
 				className="modal-outer-container"
 			>
 				<div className="modal-inner-container">
-					<div className="modal-input-container">
+					<div className="modal-input-container task">
 						<input
 							name="todoItemValue"
 							placeholder="Add Task..."
@@ -97,8 +109,9 @@ export default class ModalInput extends React.Component {
 							autoFocus
 						/>
 					</div>
+
 					<h4 className="modal-heading">Est. Number of Pomodoros </h4>
-					<div className="modal-input-container">
+					<div className="modal-input-container number">
 						<input
 							name="numPomodoros"
 							placeholder={1}
@@ -112,6 +125,24 @@ export default class ModalInput extends React.Component {
 						<Button icon="caret up" onClick={this.increment} />
 						<Button icon="caret down" onClick={this.decrement} />
 					</div>
+
+					{!showNote && (
+						<h4 className="modal-heading show-note" onClick={this.showNoteField}>
+							+ Add Notes{' '}
+						</h4>
+					)}
+					{showNote && (
+						<div className="modal-input-container note">
+							<textarea
+								name="itemDescription"
+								placeholder="Some notes..."
+								value={itemDescription}
+								onChange={this.handleChange}
+								className="modal-todo-input"
+								autoFocus
+							/>
+						</div>
+					)}
 				</div>
 				<div className="modal-footer">
 					<Button floated="right" color="grey" disabled={!addButtonActive} onClick={this.handleSubmit}>

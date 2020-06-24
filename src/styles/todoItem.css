@@ -8,8 +8,27 @@
 	min-height: 27px;
 }
 
+.task-info:hover {
+	cursor: pointer;
+}
+
+.task-info {
+	width: 100%;
+}
+
+.todo-item-note-container {
+	box-sizing: border-box;
+	background-color: rgb(255, 252, 213);
+	display: flex;
+	padding: 1em 0.8em;
+	margin-top: 0.5em;
+	width: 100%;
+	border-radius: 5px;
+}
+
 .todo-item-container-left {
 	display: flex;
+	width: 90%;
 }
 
 .todo-item-complete-button {
@@ -36,9 +55,9 @@
 	border: 2px solid #a2adc1;
 }
 
-.todo-item-circle-empty:hover {
+/* .todo-item-circle-empty:hover {
 	background: #a2adc12e;
-}
+} */
 
 .todo-item-circle-check {
 	background: #64e232;
@@ -64,11 +83,13 @@
 }
 
 .todo-item-start-session-button {
+	display: block;
+	outline: 0;
 	color: #a2adc1;
 	border: 0;
 	background: none;
 	cursor: pointer;
-	display: none;
+	/* display: none; */
 }
 
 .todo-item-start-session-button > svg {
@@ -76,16 +97,16 @@
 	height: 24px;
 }
 
-.todo-item-start-session-button:hover > svg {
+/* .todo-item-start-session-button:hover > svg {
 	width: 25px;
 	height: 25px;
-}
+} */
 
 /* bad for a11y but looks better 🤷‍ */
 /* good fix: https://medium.freecodecamp.org/how-to-make-your-fancy-svg-button-accessible-83c9172c3c15 */
-.todo-item-start-session-button:focus {
+/* .todo-item-start-session-button:focus {
 	outline: 0;
-}
+} */
 
 .todo-item-container:hover .todo-item-start-session-button {
 	display: block;

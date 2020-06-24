@@ -3,7 +3,7 @@
 	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
-	height: 15em;
+	/* height: 20em; */
 	max-width: 570px !important;
 	margin: 15% auto;
 	margin-bottom: 0em;
@@ -66,6 +66,33 @@
 
 .modal-todo-input:focus {
 	outline: 2px #8a98af;
+}
+
+.note {
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+	/* width: 100%; */
+}
+.task input {
+	width: 50%;
+}
+
+.note textarea {
+	display: block;
+	background: #e0e0e0;
+	border-radius: 4px;
+	width: 100%;
+}
+
+.number input {
+	background-color: #e0e0e0;
+	border-radius: 4px;
+	margin-right: 0.3em;
+}
+
+.show-note:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .modal-footer {
