@@ -121,7 +121,7 @@ class Timer extends React.Component {
 					{this.state.task && (
 						<div className="description">
 							<p>
-								Working on: <b>{task.description}</b>
+								Working on: <b>{task.task}</b>
 							</p>
 						</div>
 					)}

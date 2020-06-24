@@ -31,14 +31,15 @@ class App extends React.Component {
 		};
 	}
 
-	addItem(description) {
+	addItem(task, expectedPomodoros) {
 		const { nextItemId } = this.state;
 
 		const newItem = {
 			id: nextItemId,
-			description: description,
+			task: task,
 			sessionsCompleted: 0,
-			isCompleted: false
+			isCompleted: false,
+			expectedSessions: expectedPomodoros
 		};
 		this.setState((prevState) => ({
 			items: prevState.items.concat(newItem),
@@ -155,7 +156,8 @@ class App extends React.Component {
 							{items.map((item) => (
 								<TodoItem
 									key={item.id}
-									description={item.description}
+									task={item.task}
+									expectedSessions={item.expectedSessions}
 									sessionsCompleted={item.sessionsCompleted}
 									isCompleted={item.isCompleted}
 									startSession={() => this.startSession(item.id)}

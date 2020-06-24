@@ -18,6 +18,8 @@ export default class ModalInput extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.taskChange = this.handleSubmit.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.increment = this.increment.bind(this);
+		this.decrement = this.decrement.bind(this);
 	}
 
 	taskChange(e) {
@@ -41,11 +43,11 @@ export default class ModalInput extends React.Component {
 	}
 
 	handleSubmit(e) {
-		e.preventDefault(); // use it for any and all forms with custom submit behavior
+		e.preventDefault();
 		const { addItem } = this.props;
 		const { todoItemValue, numPomodoros } = this.state;
 		if (todoItemValue !== '') {
-			addItem(todoItemValue);
+			addItem(todoItemValue, numPomodoros);
 			this.setState({
 				numPomodoros: 1,
 				todoItemValue: ''
@@ -55,11 +57,28 @@ export default class ModalInput extends React.Component {
 
 	handleClose() {
 		const { handleCloseModal } = this.props;
+		this.setState({
+			numPomodoros: 1,
+			todoItemValue: '',
+			addButtonActive: false
+		});
 		handleCloseModal();
 	}
 
+	increment() {
+		this.setState((prevState) => ({
+			numPomodoros: parseInt(prevState.numPomodoros) + 1
+		}));
+	}
+
+	decrement() {
+		this.setState((prevState) => ({
+			numPomodoros: prevState.numPomodoros < 2 ? 1 : parseInt(prevState.numPomodoros) - 1
+		}));
+	}
+
 	render() {
-		const { todoItemValue, addButtonActive } = this.state;
+		const { numPomodoros, todoItemValue, addButtonActive } = this.state;
 		return (
 			<ReactModal
 				isOpen={this.props.showModal}
@@ -82,13 +101,16 @@ export default class ModalInput extends React.Component {
 					<div className="modal-input-container">
 						<input
 							name="numPomodoros"
-							placeholder="1"
+							placeholder={1}
 							onChange={this.handleChange}
+							value={numPomodoros}
 							className="modal-todo-input"
 							type="number"
+							min={1}
+							step={1}
 						/>
-						<Button icon="caret up" />
-						<Button icon="caret down" />
+						<Button icon="caret up" onClick={this.increment} />
+						<Button icon="caret down" onClick={this.decrement} />
 					</div>
 				</div>
 				<div className="modal-footer">
