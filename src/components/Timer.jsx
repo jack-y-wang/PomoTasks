@@ -72,11 +72,13 @@ class Timer extends React.Component {
 					time: prevState.time - 1
 				}),
 				() => {
+					document.title = formatSecondsToMinutesAndSeconds(time);
 					if (time === 0) {
 						this.stop();
 
 						if (mode === 'WORK') {
 							this.setTimer('BREAK', MODES_TIMES.BREAK);
+							document.title = 'Break Time';
 						}
 
 						if (mode === 'BREAK') {

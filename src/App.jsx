@@ -157,6 +157,7 @@ class App extends React.Component {
 						<div className="items-container">
 							{items.map((item) => (
 								<TodoItem
+									key={item.id}
 									id={item.id}
 									task={item.task}
 									description={item.description}
