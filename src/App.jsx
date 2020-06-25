@@ -27,7 +27,8 @@ class App extends React.Component {
 			itemIdRunning: null,
 			areItemsMarkedAsCompleted: false,
 			activeItem: null,
-			showModal: false
+			showModal: false,
+			sessionIdRunning: null
 		};
 	}
 
@@ -156,7 +157,7 @@ class App extends React.Component {
 						<div className="items-container">
 							{items.map((item) => (
 								<TodoItem
-									key={item.id}
+									id={item.id}
 									task={item.task}
 									description={item.description}
 									expectedSessions={item.expectedSessions}
@@ -164,6 +165,7 @@ class App extends React.Component {
 									isCompleted={item.isCompleted}
 									startSession={() => this.startSession(item.id)}
 									toggleIsCompleted={() => this.toggleItemIsCompleted(item.id)}
+									itemIdRunning={this.state.itemIdRunning}
 								/>
 							))}
 						</div>

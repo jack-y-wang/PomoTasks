@@ -3,15 +3,18 @@ import '../styles/todoItem.css';
 import SessionsCompletedCounter from './SessionsCompletedCounter';
 import { ReactComponent as Check } from '../icons/check.svg';
 import { ReactComponent as Clock } from '../icons/clock.svg';
+import { Icon } from 'semantic-ui-react';
 
 function TodoItem({
+	id,
 	task,
 	description,
 	sessionsCompleted,
 	isCompleted,
 	startSession,
 	toggleIsCompleted,
-	expectedSessions
+	expectedSessions,
+	itemIdRunning
 }) {
 	var sessionsRemaining = expectedSessions - sessionsCompleted;
 	return (
@@ -39,9 +42,11 @@ function TodoItem({
 					)}
 				</div>
 			</div>
-			<button type="button" onClick={startSession} className="todo-item-start-session-button">
-				<Clock />
-			</button>
+
+			{/* <div>
+				<Icon name="ellipsis vertical" />
+			</div> */}
+			{id === itemIdRunning ? <div className="active-item-bar" /> : <div className="item-bar" />}
 		</div>
 	);
 }
