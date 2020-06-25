@@ -4,8 +4,8 @@ import PausePlayButton from './PausePlayButton';
 import ResetButton from './ResetButton';
 import '../styles/timer.css';
 
-const WORK_TIME = 2;
-const BREAK_TIME = 1;
+const WORK_TIME = 1500;
+const BREAK_TIME = 300;
 
 const MODES_TIMES = {
 	WORK: WORK_TIME,
@@ -80,10 +80,10 @@ class Timer extends React.Component {
 							this.setTimer('BREAK', MODES_TIMES.BREAK);
 							document.title = 'Break Time';
 						}
-
 						if (mode === 'BREAK') {
 							this.completeSession();
 							this.setTimer('WORK', MODES_TIMES.WORK);
+							document.title = 'Work Time';
 						}
 					}
 				}

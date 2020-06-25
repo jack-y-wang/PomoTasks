@@ -2,8 +2,6 @@ import React from 'react';
 import '../styles/todoItem.css';
 import SessionsCompletedCounter from './SessionsCompletedCounter';
 import { ReactComponent as Check } from '../icons/check.svg';
-import { ReactComponent as Clock } from '../icons/clock.svg';
-import { Icon } from 'semantic-ui-react';
 
 function TodoItem({
 	id,
