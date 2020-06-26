@@ -1,3 +1,19 @@
+# PomoTasks
+
+Pomodoro timer to-do list app @ https://pomotasks.netlify.com/
+
+This aims to help focus on any task we're working on, such as studying, writing, and coding.
+This is inspired by the Pomodoro Technique which is a time managment method.
+
+## Features
+### Pomodoro
+* Break your work sessions into checks of pomodoros sessions (1 = 25 min work + 5 min break ).
+### To-List 
+* Be able to plan your work sessions into different tasks and set an estimated number of pomodoro sessions 
+and a note feature to provide additional information and reminders.
+
+This project is adapted from Lab 9, Pomodoist, from the React Decal @ UC Berkeley
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
